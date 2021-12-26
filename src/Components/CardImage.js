@@ -6,6 +6,7 @@ function CardImage({ url }) {
 
 const Image = styled.img`
   height: 100%;
+  /* width: 90%; */
 `;
 
 export default CardImage;

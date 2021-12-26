@@ -1,13 +1,19 @@
 import styled from "@emotion/styled";
+import { useFetchData } from "../Hooks/fetchHook";
+// import { useEffect, useState } from "react";
 import CardImage from "./CardImage";
 
-function Card() {
+function Card({ name, index }) {
   return (
     <Container>
       <RightSide>
-        <CardImage url="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/23.png" />
+        <CardImage
+          url={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
+            index + 1
+          }.png`}
+        />
       </RightSide>
-      <CardTitle>Pachi</CardTitle>
+      <CardTitle>{name}</CardTitle>
 
       <CardTypeContainer>
         <CardType>Electric</CardType>
@@ -35,6 +41,7 @@ const RightSide = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2px;
 `;
 
 const CardTitle = styled.p`
