@@ -1,12 +1,37 @@
 import styled from "@emotion/styled";
-import { useFetchData } from "../Hooks/fetchHook";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { Colors } from "../constants";
 import CardImage from "./CardImage";
 
 function Card({ name, index }) {
+  const [pokemon, setPokemon] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${name}`
+        );
+        if (!response.ok) {
+          throw new Error(`Http status ${response.status}`);
+        }
+        const data = await response.json();
+        // console.log(data.types[0].type.name);
+        setPokemon(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getData();
+  }, [name]);
+
   return (
     <Container>
-      <RightSide>
+      <RightSide
+        backgroundColor={
+          pokemon.types ? Colors[pokemon.types[0].type.name] : "white"
+        }
+      >
         <CardImage
           url={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
             index + 1
@@ -15,8 +40,12 @@ function Card({ name, index }) {
       </RightSide>
       <CardTitle>{name}</CardTitle>
 
-      <CardTypeContainer>
-        <CardType>Electric</CardType>
+      <CardTypeContainer
+        backgroundColor={
+          pokemon.types ? Colors[pokemon.types[0].type.name] : "white"
+        }
+      >
+        <CardType>{pokemon.types[0].type.name}</CardType>
       </CardTypeContainer>
     </Container>
   );
@@ -32,7 +61,7 @@ const Container = styled.div`
 `;
 
 const RightSide = styled.div`
-  background: linear-gradient(180deg, #f2cb07 0%, #f2c307 41.15%, #f2b807 100%);
+  background: ${(props) => props.backgroundColor};
   height: 100%;
   width: 65%;
   position: absolute;
@@ -62,7 +91,7 @@ const CardType = styled.p`
 `;
 
 const CardTypeContainer = styled.div`
-  background: #f2cb07;
+  background: ${(props) => props.backgroundColor};
   box-shadow: inset 0px -2px 0px rgba(0, 0, 0, 0.18);
   border-radius: 11px;
   width: fit-content;

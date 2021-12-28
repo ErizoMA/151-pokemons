@@ -5,7 +5,7 @@ import Title from "../Components/Title";
 import { useFetchData } from "../Hooks/fetchHook";
 
 function Home() {
-  const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=10";
+  const BASE_URL = "https://pokeapi.co/api/v2/pokemon?limit=50";
   const { data, loading, error } = useFetchData(BASE_URL);
   if (loading) return "Loading . . .";
   if (error) return `Error ${error}`;
@@ -29,17 +29,15 @@ const HomeContainer = styled.div`
 `;
 
 const CardsContainer = styled.div`
+  padding: 10px;
+  margin: 0 5%;
   background: green;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 30px;
   flex-flow: wrap;
-
-  /* display: grid;
-  place-items: center;
-  row-gap: 10px; */
 `;
 
 export default Home;
