@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Colors } from "../constants";
 import CardImage from "./CardImage";
 
-function Card({ name, index }) {
+function Card({ name }) {
   const [pokemon, setPokemon] = useState([]);
   useEffect(() => {
     const getData = async () => {
@@ -31,11 +31,11 @@ function Card({ name, index }) {
           pokemon.types ? Colors[pokemon.types[0].type.name] : "white"
         }
       >
-        <CardImage
-          url={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${
-            index + 1
-          }.png`}
-        />
+        {pokemon?.id ? (
+          <CardImage
+            url={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+          />
+        ) : null}
       </RightSide>
       <CardTitle>{name}</CardTitle>
       <StatsContainer>
@@ -54,11 +54,11 @@ function Card({ name, index }) {
       </StatsContainer>
       <CardTypeContainer
         backgroundColor={
-          pokemon.types ? Colors[pokemon.types[0].type.name] : "white"
+          pokemon.types ? Colors[pokemon.types[0].type.name] : "red"
         }
       >
         <CardType>
-          {pokemon.types ? pokemon.types[0].type.name : "Unkown"}
+          {pokemon.types ? pokemon.types[0].type.name : "Unknown"}
         </CardType>
       </CardTypeContainer>
     </Container>
@@ -147,7 +147,6 @@ const StatName = styled.p`
   font-size: 0.75em;
   line-height: 14px;
   text-align: center;
-
   color: #4b4b4b;
 `;
 

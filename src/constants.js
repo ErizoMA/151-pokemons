@@ -13,4 +13,5 @@ export const Colors = {
   flying: "#F5F5F5",
   fighting: "#E6E0D4",
   normal: "#F5F5F5",
+  ice: "#98D8D8",
 };

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 function Title() {
   return (
     <P>
-      150 <Span>Pokemons</Span> for you to choose your favorite
+      151 <Span>Pokemons</Span> for you to choose your favorite
     </P>
   );
 }
