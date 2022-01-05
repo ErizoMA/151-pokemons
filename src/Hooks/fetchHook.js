@@ -18,7 +18,7 @@ export const useFetchData = (
           throw new Error(`Http status ${response.status}`);
         }
         const data = await response.json();
-        data.results.map((pokemon) => {
+        data.results.forEach((pokemon) => {
           fetch(pokemon.url)
             .then((res) => res.json())
             .then((data) =>
@@ -33,7 +33,7 @@ export const useFetchData = (
       setLoading(false);
     };
     fetchData();
-  }, [BASE_URL]); //Hacer enfasis en la url
+  }, [BASE_URL, error_msg]); //Hacer enfasis en la url
   //Retornamos nuestro fetch_data como data, nuestro loading y error
   return { data: fetch_data, loading, error };
 };

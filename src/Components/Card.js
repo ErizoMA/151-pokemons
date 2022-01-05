@@ -23,14 +23,21 @@ function Card({ name, types, id, stats }) {
           <StatName>Defense</StatName>
         </Stat>
       </StatsContainer>
-      <CardTypeContainer
-        backgroundColor={Colors[types[0].type.name] ?? "white"}
-      >
-        <CardType>{types[0].type.name ?? "Unknown"}</CardType>
-      </CardTypeContainer>
+      <TypesContainer>
+        {types.map((e) => (
+          <CardTypeContainer backgroundColor={Colors[e.type.name]}>
+            <CardType>{e.type.name}</CardType>{" "}
+          </CardTypeContainer>
+        ))}
+      </TypesContainer>
     </Container>
   );
 }
+
+const TypesContainer = styled.div`
+  display: flex;
+  gap: 4px;
+`;
 const Container = styled.div`
   width: 351px;
   height: 136px;

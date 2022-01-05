@@ -5,7 +5,6 @@ function Pagination({ pokemonsPerPage, totalPokemons, paginate }) {
   for (let i = 1; i < Math.ceil(totalPokemons / pokemonsPerPage) + 1; i++) {
     pageNumbers.push(i);
   }
-  if (pageNumbers.length !== 11) return <p>Loading...</p>;
   return (
     <Ul>
       {pageNumbers.map((number) => (
@@ -14,7 +13,7 @@ function Pagination({ pokemonsPerPage, totalPokemons, paginate }) {
             onClick={() => {
               paginate(number);
             }}
-            href="#"
+            href={`#${number}`}
           >
             {number}
           </A>
@@ -55,4 +54,5 @@ const A = styled.a`
   }
 `;
 
+const P = styled.p``;
 export default Pagination;
