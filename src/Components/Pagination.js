@@ -54,5 +54,4 @@ const A = styled.a`
   }
 `;
 
-const P = styled.p``;
 export default Pagination;

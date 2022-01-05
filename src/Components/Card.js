@@ -25,7 +25,10 @@ function Card({ name, types, id, stats }) {
       </StatsContainer>
       <TypesContainer>
         {types.map((e) => (
-          <CardTypeContainer backgroundColor={Colors[e.type.name]}>
+          <CardTypeContainer
+            key={e.type.name}
+            backgroundColor={Colors[e.type.name]}
+          >
             <CardType>{e.type.name}</CardType>{" "}
           </CardTypeContainer>
         ))}
