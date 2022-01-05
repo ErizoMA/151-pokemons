@@ -1,65 +1,32 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
 import { Colors } from "../constants";
 import CardImage from "./CardImage";
 
-function Card({ name }) {
-  const [pokemon, setPokemon] = useState([]);
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon/${name}`
-        );
-        if (!response.ok) {
-          throw new Error(`Http status ${response.status}`);
-        }
-        const data = await response.json();
-        setPokemon(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getData();
-  }, [name]);
-
+function Card({ name, types, id, stats }) {
   return (
     <Container>
-      <RightSide
-        backgroundColor={
-          pokemon.types ? Colors[pokemon.types[0].type.name] : "white"
-        }
-      >
-        {pokemon?.id ? (
+      <RightSide backgroundColor={Colors[types[0].type.name] ?? "white"}>
+        {id ? (
           <CardImage
-            url={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`}
+            url={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`}
           />
         ) : null}
       </RightSide>
       <CardTitle>{name}</CardTitle>
       <StatsContainer>
         <Stat>
-          <StatCircle>
-            {pokemon.stats ? pokemon.stats[1].base_stat : "Unknown"}
-          </StatCircle>
+          <StatCircle>{stats[1].base_stat ?? "Unknown"}</StatCircle>
           <StatName>Attack</StatName>
         </Stat>
         <Stat>
-          <StatCircle>
-            {pokemon.stats ? pokemon.stats[2].base_stat : "Unknown"}
-          </StatCircle>
+          <StatCircle>{stats[2].base_stat ?? "Unknown"}</StatCircle>
           <StatName>Defense</StatName>
         </Stat>
       </StatsContainer>
       <CardTypeContainer
-        backgroundColor={
-          pokemon.types ? Colors[pokemon.types[0].type.name] : "red"
-        }
+        backgroundColor={Colors[types[0].type.name] ?? "white"}
       >
-        <CardType>
-          {pokemon.types ? pokemon.types[0].type.name : "Unknown"}
-        </CardType>
+        <CardType>{types[0].type.name ?? "Unknown"}</CardType>
       </CardTypeContainer>
     </Container>
   );

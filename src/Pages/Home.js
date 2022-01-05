@@ -11,7 +11,6 @@ function Home() {
   const { data, loading, error } = useFetchData(BASE_URL);
   const [currentPage, setCurrentPage] = useState(1);
   const [pokemonsPerPage] = useState(15);
-
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
   const currentPokemons = data.slice(indexOfFirstPokemon, indexOfLastPokemon);
@@ -32,8 +31,8 @@ function Home() {
         paginate={paginate}
       />
       <CardsContainer>
-        {currentPokemons.map((element, index) => (
-          <Card name={element.name} key={element.name} />
+        {currentPokemons.map((pokemon) => (
+          <Card {...pokemon} key={pokemon.name} />
         ))}
       </CardsContainer>
     </HomeContainer>
@@ -43,7 +42,7 @@ function Home() {
 const HomeContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 `;
 
 const CardsContainer = styled.div`

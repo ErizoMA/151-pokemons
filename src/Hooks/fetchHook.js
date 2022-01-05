@@ -18,8 +18,13 @@ export const useFetchData = (
           throw new Error(`Http status ${response.status}`);
         }
         const data = await response.json();
-        console.log(data);
-        setFetchData(data.results);
+        data.results.map((pokemon) => {
+          fetch(pokemon.url)
+            .then((res) => res.json())
+            .then((data) =>
+              setFetchData((fetch_data) => [...fetch_data, data])
+            );
+        });
       } catch (error) {
         //Si hay un error ...
         console.error(error.message);
