@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useState } from "react";
 import Card from "../Components/Card";
+import Footer from "../Components/Footer";
 import Nav from "../Components/Nav";
 import Pagination from "../Components/Pagination";
 import Title from "../Components/Title";
@@ -35,6 +36,7 @@ function Home() {
           <Card {...pokemon} key={pokemon.name} />
         ))}
       </CardsContainer>
+      <Footer leftText="Make with ❤️" rightText="Pokemon 1996" />
     </HomeContainer>
   );
 }
@@ -46,8 +48,7 @@ const HomeContainer = styled.div`
 `;
 
 const CardsContainer = styled.div`
-  padding: 10px;
-  margin: 0 5%;
+  padding: 10px 5% 20px;
   display: flex;
   flex-direction: column;
   align-items: center;

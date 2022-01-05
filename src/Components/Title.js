@@ -13,7 +13,8 @@ const P = styled.p`
   letter-spacing: 3px;
   font-weight: 400;
   font-size: 35px;
-  margin: 0 5%;
+  padding: 10px;
+  margin-top: 5px;
 `;
 const Span = styled.span`
   font-weight: 700;
